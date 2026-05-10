@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+    <title>Mulberry Fire Kit — Sample Level</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hud glass-panel">
+        <div>
+          <p class="eyebrow">Sample mobile-first level</p>
+          <h1>Mulberry Fire Kit</h1>
+          <p id="objectiveText" class="objective-text">Harvest the first parts.</p>
+        </div>
+
+        <div class="hud-right">
+          <div class="currency-box" aria-live="polite">
+            <span class="currency-label">Mulberries</span>
+            <strong id="currencyValue">0</strong>
+          </div>
+
+          <div class="button-row">
+            <button id="hintButton" class="action-button secondary">Hint</button>
+            <button id="skipButton" class="action-button secondary">Skip step</button>
+            <button id="resetButton" class="action-button ghost">Reset</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="game-grid">
+        <aside class="panel environment-panel glass-panel">
+          <div class="panel-heading">
+            <h2>Environment</h2>
+            <p>Tap hotspots to harvest. Crafted tools then unlock the next action.</p>
+          </div>
+
+          <div id="hotspotList" class="hotspot-list"></div>
+
+          <div class="assist-box">
+            <h3>Assist notes</h3>
+            <p>Drag parts so they overlap the correct sockets. Drag placed parts back to the inventory tray if you want to revise the build.</p>
+            <p>Pinch on the board to zoom the assembly diorama.</p>
+          </div>
+        </aside>
+
+        <section class="board-panel glass-panel">
+          <div class="panel-heading compact">
+            <h2>Assembly board</h2>
+            <p id="boardStateText">Build the bow drill and the fire pit.</p>
+          </div>
+
+          <div id="boardArea" class="board-area" aria-label="Assembly board">
+            <div id="boardInner" class="board-inner">
+              <div class="table-shadow"></div>
+
+              <section class="assembly-zone bow-zone">
+                <div class="zone-title">Bow drill rig</div>
+                <div class="rig-illustration"></div>
+
+                <div
+                  class="slot drop-target"
+                  id="slotBowBranch"
+                  data-slot-id="slotBowBranch"
+                  data-accept="branch"
+                  style="left: 14%; top: 33%; width: 28%; height: 18%;"
+                >
+                  <span>Curved branch</span>
+                </div>
+
+                <div
+                  class="slot drop-target"
+                  id="slotBowSpindle"
+                  data-slot-id="slotBowSpindle"
+                  data-accept="spindle"
+                  style="left: 43%; top: 17%; width: 16%; height: 38%;"
+                >
+                  <span>Spindle</span>
+                </div>
+
+                <div
+                  class="slot drop-target"
+                  id="slotBowFibre"
+                  data-slot-id="slotBowFibre"
+                  data-accept="fibre"
+                  style="left: 61%; top: 36%; width: 23%; height: 12%;"
+                >
+                  <span>Fibre strip</span>
+                </div>
+
+                <div id="bowCraftNotice" class="craft-notice">Place all three parts to assemble the bow drill.</div>
+              </section>
+
+              <section class="assembly-zone fire-zone">
+                <div class="zone-title">Fire pit</div>
+                <div id="fireGlow" class="fire-glow"></div>
+                <div class="pit-ring"></div>
+
+                <div
+                  class="slot drop-target stone-slot"
+                  data-slot-id="slotStoneA"
+                  data-accept="stone"
+                  style="left: 20%; top: 28%; width: 16%; height: 14%;"
+                >
+                  <span>Stone</span>
+                </div>
+                <div
+                  class="slot drop-target stone-slot"
+                  data-slot-id="slotStoneB"
+                  data-accept="stone"
+                  style="left: 58%; top: 28%; width: 16%; height: 14%;"
+                >
+                  <span>Stone</span>
+                </div>
+                <div
+                  class="slot drop-target stone-slot"
+                  data-slot-id="slotStoneC"
+                  data-accept="stone"
+                  style="left: 39%; top: 58%; width: 16%; height: 14%;"
+                >
+                  <span>Stone</span>
+                </div>
+
+                <div
+                  class="slot drop-target tinder-slot"
+                  data-slot-id="slotTinder"
+                  data-accept="tinder"
+                  style="left: 35%; top: 36%; width: 24%; height: 18%;"
+                >
+                  <span>Tinder</span>
+                </div>
+
+                <div id="ignitionZone" class="ignition-zone drop-target" data-kind="ignition" data-accept="bowDrill">
+                  <div class="ignition-inner">
+                    <strong>Ignition zone</strong>
+                    <span>Drop the assembled bow drill here once the fire pit is ready.</span>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel inventory-panel glass-panel">
+          <div class="panel-heading">
+            <h2>Inventory tray</h2>
+            <p>Drag parts from here onto the board, or drag placed parts back here.</p>
+          </div>
+
+          <div id="inventoryDropZone" class="inventory-drop-zone drop-target" data-kind="inventory-return" data-accept="*">
+            <div id="inventoryList" class="inventory-list"></div>
+          </div>
+
+          <div class="panel-heading compact second">
+            <h2>Event log</h2>
+          </div>
+          <ol id="logList" class="log-list" aria-live="polite"></ol>
+        </aside>
+      </main>
+    </div>
+
+    <div id="dragLayer" class="drag-layer" aria-hidden="true"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
